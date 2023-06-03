@@ -5,11 +5,11 @@ const app = express()
 const port = 3000
 
 const dbConfig = {
-  host: "database-1.cmvjkstmwutb.ap-southeast-2.rds.amazonaws.com",
-  port: "3306",
-  user: "admin",
-  password: "mypassword",
-  database: "iotData"
+  host: "",
+  port: "",
+  user: "",
+  password: "",
+  database: ""
 }
 const db = mysql.createConnection(dbConfig)
 db.connect((error) => {

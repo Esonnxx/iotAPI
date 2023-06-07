@@ -5,11 +5,11 @@ const app = express()
 const port = 3000
 
 const dbConfig = {
-  host: "",
-  port: "",
-  user: "",
-  password: "",
-  database: ""
+  host: "database-1.cmvjkstmwutb.ap-southeast-2.rds.amazonaws.com",
+  port: "3306",
+  user: "admin",
+  password: "mypassword",
+  database: "iotData"
 }
 const db = mysql.createConnection(dbConfig)
 db.connect((error) => {
@@ -23,14 +23,14 @@ db.connect((error) => {
 })
 
 function getLatestData (callback) {
-  const query = `SELECT * FROM soilData ORDER BY id DESC LIMIT 1`
+  const query = `SELECT * FROM soilData ORDER BY id DESC LIMIT 10`
   db.query(query, (error, results) => {
     if (error) {
       console.log(error.message)
       callback(error, null)
     } else {
       if (results.length > 0) {
-        const latestData = results[0]
+        const latestData = results
         callback(null, latestData)
       } else
         callback(null, null)

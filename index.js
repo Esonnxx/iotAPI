@@ -1,15 +1,15 @@
 const express = require('express')
 const mysql = require('mysql')
-
+const cors = require('cors')
 const app = express()
 const port = 3000
 
 const dbConfig = {
-  host: "",
-  port: "",
-  user: "",
-  password: "",
-  database: ""
+  host: "35.192.214.39",
+  port: "3306",
+  user: "root",
+  password: "mypassword",
+  database: "iotData"
 }
 const db = mysql.createConnection(dbConfig)
 db.connect((error) => {
@@ -37,8 +37,9 @@ function getLatestData (callback) {
     }
   })
 }
-
+app.use(cors())
 app.get('/api/latest_data', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
   getLatestData((error, latestData) => {
     if (error) {
       console.log(error)
@@ -55,10 +56,11 @@ setInterval(() => {
     if (error) {
       console.log(error)
     } else {
-      console.log('Latest Data: ', latestData)
+      console.log('Latest Data: ')
+      console.log(latestData)
     }
   })
-}, 10000)
+}, 3600000)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)

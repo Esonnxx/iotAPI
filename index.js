@@ -5,11 +5,11 @@ const app = express()
 const port = 3000
 
 const dbConfig = {
-  host: "35.192.214.39",
-  port: "3306",
-  user: "root",
-  password: "mypassword",
-  database: "iotData"
+  host: "",
+  port: "",
+  user: "",
+  password: "",
+  database: ""
 }
 const db = mysql.createConnection(dbConfig)
 db.connect((error) => {
